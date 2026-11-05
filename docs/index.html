@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Survivors Hub: Azeroth Survivors build planner, run tracker and mod manager</title>
+<meta name="description" content="Free app for Azeroth Survivors: track every run, make and share builds from real runs, browse community builds, and keep your mods and add-ons set up right and up to date.">
+<meta name="keywords" content="Azeroth Survivors, Azeroth Survivors mods, Azeroth Survivors addons, Azeroth Survivors build planner, Azeroth Survivors builds, Azeroth Survivors tracker, Azeroth Survivors DPS">
+<link rel="canonical" href="https://wuvme000.github.io/SurvivorsHub-releases/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wuvme000.github.io/SurvivorsHub-releases/">
+<meta property="og:site_name" content="Survivors Hub">
+<meta property="og:title" content="Survivors Hub: build planner, run tracker and mod manager for Azeroth Survivors">
+<meta property="og:description" content="Track every run, share builds made from real runs, and keep your Azeroth Survivors add-ons up to date. Free and fan-made.">
+<meta property="og:image" content="https://wuvme000.github.io/SurvivorsHub-releases/img/share-card-2.webp">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Survivors Hub",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Windows 10, Windows 11",
+  "description": "A free companion app for Azeroth Survivors: run tracker with damage charts, build planner with builds made from real runs, community builds, and a mod and add-on manager that keeps add-ons up to date.",
+  "url": "https://wuvme000.github.io/SurvivorsHub-releases/",
+  "downloadUrl": "https://github.com/Wuvme000/SurvivorsHub-releases/releases/latest",
+  "image": "https://wuvme000.github.io/SurvivorsHub-releases/img/run.webp",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #110e0b; --panel: #1b1713; --panel-2: #221d18; --line: #2f2820; --line-strong: #43382b;
+    --text: #f3ece0; --text-2: #c9bda9; --text-3: #8f8371;
+    --gold: #e8b04a; --gold-2: #ffcf6e; --gold-soft: rgba(232, 176, 74, 0.14); --green: #6fd38a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, sans-serif; line-height: 1.55; }
+  body { background: radial-gradient(1200px 600px at 50% -200px, rgba(232, 176, 74, 0.12), transparent 70%), var(--bg); }
+  a { color: var(--gold-2); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+  header { display: flex; align-items: center; gap: 10px; padding: 22px 0; font-weight: 800; font-size: 17px; }
+  header img { width: 34px; height: 34px; border-radius: 9px; }
+
+  .hero { text-align: center; padding: 56px 0 40px; }
+  .hero img { width: 96px; height: 96px; border-radius: 24px; box-shadow: 0 12px 40px rgba(232, 176, 74, 0.25); }
+  .hero h1 { margin: 22px 0 10px; font-size: clamp(34px, 6vw, 52px); line-height: 1.1; letter-spacing: -1px; font-weight: 800; }
+  .hero p { margin: 0 auto; max-width: 600px; font-size: 18px; color: var(--text-2); }
+  .hero .kicker { margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--gold-2); letter-spacing: 0.2px; }
+  .cta { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 30px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 28px; border-radius: 14px; font-weight: 800; font-size: 17px; text-decoration: none;
+    color: #1a1206; background: linear-gradient(180deg, var(--gold-2), var(--gold)); box-shadow: 0 10px 30px rgba(232, 176, 74, 0.3); transition: transform 0.12s, filter 0.12s; }
+  .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  .btn svg { width: 20px; height: 20px; }
+  .meta { font-size: 13.5px; color: var(--text-3); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 40px 0; }
+  .card { padding: 20px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
+  .card h3 { margin: 10px 0 6px; font-size: 16.5px; }
+  .card p { margin: 0; color: var(--text-2); font-size: 14.5px; }
+  .ico { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold-2); }
+  .ico svg { width: 21px; height: 21px; }
+
+  h2 { font-size: 24px; margin: 52px 0 16px; letter-spacing: -0.3px; }
+  .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+  ul.checks { list-style: none; margin: 0; padding: 0; }
+  ul.checks li { position: relative; padding: 7px 0 7px 30px; color: var(--text-2); }
+  ul.checks li::before { content: ''; position: absolute; left: 4px; top: 13px; width: 13px; height: 7px; border-left: 2.5px solid var(--green); border-bottom: 2.5px solid var(--green); transform: rotate(-45deg); }
+  ol.steps { margin: 0; padding-left: 22px; color: var(--text-2); }
+  ol.steps li { padding: 5px 0; }
+  ol.steps b { color: var(--text); }
+  .note { margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: var(--panel-2); border: 1px solid var(--line-strong); font-size: 14px; color: var(--text-2); }
+
+  footer { margin: 64px 0 0; padding: 26px 0 40px; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-3); }
+  footer p { margin: 4px 0; }
+  /* screenshots */
+  .shot { margin: 44px auto 0; max-width: 980px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line-strong);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,176,74,0.08); background: var(--panel); }
+  .shot img { display: block; width: 100%; height: auto; }
+  .spot { display: grid; grid-template-columns: 1fr 1.05fr; gap: 34px; align-items: center; margin: 56px 0 44px; }
+  .spot h2 { margin: 0 0 10px; }
+  .spot p { margin: 0 0 12px; color: var(--text-2); font-size: 16px; }
+  .spot .shot { margin: 0; max-width: 520px; justify-self: end; }
+  @media (max-width: 820px) { .spot { grid-template-columns: 1fr; } .spot .shot { justify-self: center; } }
+
+  /* what Windows shows the first time, and what to click */
+  .first-run { margin: 14px 0 0; padding: 20px; border-radius: 18px; background: var(--panel); border: 1px solid var(--line); text-align: left; }
+  .first-run h3 { margin: 0 0 4px; font-size: 16.5px; }
+  .first-run > p { margin: 0 0 16px; color: var(--text-2); font-size: 14.5px; }
+  .ss-steps { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; max-width: 640px; margin: 0 auto; }
+  .ss-arrow { color: var(--text-3); font-size: 22px; }
+  .ss { position: relative; aspect-ratio: 4 / 3; border-radius: 4px; background: #c4161c; color: #fff; padding: 14px 14px 12px; font-family: 'Segoe UI', system-ui, sans-serif;
+    display: flex; flex-direction: column; box-shadow: 0 8px 24px rgba(0,0,0,0.45); }
+  .ss-title { font-size: 17px; font-weight: 400; margin-bottom: 8px; }
+  .ss-text { font-size: 10.5px; line-height: 1.4; opacity: 0.95; }
+  .ss-link { align-self: flex-start; margin-top: 6px; font-size: 11px; text-decoration: underline; }
+  .ss-meta { margin-top: 8px; font-size: 10px; opacity: 0.9; }
+  .ss-buttons { margin-top: auto; display: flex; justify-content: flex-end; gap: 6px; }
+  .ss-btn { padding: 5px 10px; font-size: 10.5px; font-weight: 600; background: #fff; color: #111; border: 1px solid #fff; }
+  .ss-btn.ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.9); }
+  .ss .click { outline: 3px solid var(--gold-2); outline-offset: 3px; border-radius: 3px; box-shadow: 0 0 0 7px rgba(255, 207, 110, 0.35); }
+  .ss-tag { position: absolute; top: -11px; left: 12px; padding: 2px 9px; border-radius: 999px; font: 800 11.5px Inter, system-ui, sans-serif; color: #1a1206; background: var(--gold-2); }
+  .ss-caption { margin-top: 8px; text-align: center; font-size: 13.5px; color: var(--text-2); }
+  .ss-caption b { color: var(--text); }
+  @media (max-width: 620px) { .ss-steps { grid-template-columns: 1fr; } .ss-arrow { transform: rotate(90deg); justify-self: center; } }
+  @media (max-width: 520px) { .hero { padding-top: 30px; } .btn { width: 100%; justify-content: center; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><img src="logo.png" alt=""> Survivors Hub</header>
+
+  <section class="hero">
+    <img src="logo.png" alt="Survivors Hub logo">
+    <h1>Your Azeroth Survivors,<br>all in one place</h1>
+    <p>A free desktop app that keeps every run you play, turns your best runs into builds you can share, and keeps your add-ons up to date.</p>
+    <p class="kicker">Run tracker · Build planner · Community builds · Mod and add-on manager</p>
+    <div class="cta">
+      <a class="btn" id="download" href="https://github.com/Wuvme000/SurvivorsHub-releases/releases/latest">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        Download for Windows
+      </a>
+      <div class="meta" id="meta">Free · Windows 10 and 11 · Updates itself</div>
+    </div>
+    <div class="shot"><img src="img/run.webp" width="1340" height="834" alt="A run in Survivors Hub: damage per second, total damage, time, kills, bosses and the damage chart over the whole run"></div>
+  </section>
+
+  <div class="grid">
+    <div class="card">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+      <h3>Every run, saved</h3>
+      <p>Map, difficulty, talents, spells, jewelry, gear and damage over time. See your best runs per map and compare two side by side.</p>
+    </div>
+    <div class="card">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <h3>Build planner with real runs</h3>
+      <p>Turn a good run into a build, with the run as proof. Publish it to the community, and browse and save the builds other players made for every class and spec.</p>
+    </div>
+    <div class="card">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
+      <h3>Mods and add-ons kept up to date</h3>
+      <p>Drop in an add-on's zip and it's set up right, folder names and all. Updates come straight from each author's own page.</p>
+    </div>
+    <div class="card">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M3 15h6"/><path d="M3 18h6"/><path d="M3 12h6"/></svg></div>
+      <h3>Game updates</h3>
+      <p>The game's patch notes and your add-ons' release notes, in one list.</p>
+    </div>
+  </div>
+
+  <div class="spot">
+    <div>
+      <h2>Share any run</h2>
+      <p>Turn a run into a picture card with its spells and ranks, gear, jewelry and all three talent trees. Copy it and paste it straight into Discord.</p>
+      <p>Or make it a build: the run comes along as proof, so other players can see it really worked.</p>
+    </div>
+    <div class="shot"><img src="img/share-card-2.webp" width="676" height="648" loading="lazy" alt="A run's share card: Naxxramas Heroic II, Feral Combat druid, with spells, gear, jewelry and talent trees"></div>
+  </div>
+
+  <div class="two">
+    <div class="card">
+      <h2 style="margin-top:0">Safe for your game</h2>
+      <ul class="checks">
+        <li>Never changes the game program or your save.</li>
+        <li>Only writes inside the game's AddOns folder and its own app folder.</li>
+        <li>Runs are recorded by a small add-on that only takes notes. It adds no windows or buttons and changes nothing.</li>
+        <li>No account needed. Only what you choose to share, like a build you publish, leaves your PC.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2 style="margin-top:0">Install</h2>
+      <ol class="steps">
+        <li><b>Download</b> the installer above and run it.</li>
+        <li>The Hub finds your game folder on its own (or pick it in Settings).</li>
+        <li>On the Runs tab, click <b>Turn it on</b> to start recording runs.</li>
+      </ol>
+      <div class="note">If Windows shows <b>"Windows protected your PC"</b>, click <b>More info</b>, then <b>Run anyway</b> (see the pictures below).</div>
+    </div>
+  </div>
+
+  <div class="first-run">
+    <h3>The first time you open it</h3>
+    <p>Windows shows a warning for new apps it hasn't seen many people download yet. It isn't saying anything is wrong: the Hub is free and doesn't have a paid publisher certificate. It only shows once, never for updates.</p>
+    <div class="ss-steps">
+      <div>
+        <div class="ss" aria-label="Windows protected your PC, with More info highlighted">
+          <span class="ss-tag">1</span>
+          <div class="ss-title">Windows protected your PC</div>
+          <div class="ss-text">Microsoft Defender SmartScreen prevented an unrecognized app from starting.</div>
+          <span class="ss-link click">More info</span>
+          <div class="ss-buttons"><span class="ss-btn">Don't run</span></div>
+        </div>
+        <div class="ss-caption">Click <b>More info</b></div>
+      </div>
+      <div class="ss-arrow" aria-hidden="true">&rarr;</div>
+      <div>
+        <div class="ss" aria-label="The same box with a Run anyway button highlighted">
+          <span class="ss-tag">2</span>
+          <div class="ss-title">Windows protected your PC</div>
+          <div class="ss-text">Microsoft Defender SmartScreen prevented an unrecognized app from starting.</div>
+          <div class="ss-meta">App: Survivors-Hub-Setup.exe<br>Publisher: Unknown publisher</div>
+          <div class="ss-buttons"><span class="ss-btn ghost click">Run anyway</span><span class="ss-btn">Don't run</span></div>
+        </div>
+        <div class="ss-caption">Then <b>Run anyway</b></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Survivors Hub is free and fan-made. It is not made by or affiliated with the Azeroth Survivors team or Blizzard Entertainment.</p>
+    <p>Add-ons belong to their authors. <a href="https://github.com/Wuvme000/SurvivorsHub-releases/releases">All releases</a></p>
+  </footer>
+</div>
+<script>
+  // point the button straight at the newest installer, and show its version
+  fetch('https://api.github.com/repos/Wuvme000/SurvivorsHub-releases/releases/latest')
+    .then(function (r) { return r.ok ? r.json() : null })
+    .then(function (rel) {
+      if (!rel) return
+      var exe = (rel.assets || []).find(function (a) { return /\.exe$/i.test(a.name) })
+      if (exe) document.getElementById('download').href = exe.browser_download_url
+      var mb = exe ? ' · ' + Math.round(exe.size / 1048576) + ' MB' : ''
+      document.getElementById('meta').textContent = 'Version ' + String(rel.tag_name).replace(/^v/, '') + mb + ' · Free · Windows 10 and 11 · Updates itself'
+    })
+    .catch(function () {})
+</script>
+</body>
+</html>

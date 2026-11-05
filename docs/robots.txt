@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wuvme000.github.io/SurvivorsHub-releases/sitemap.xml
